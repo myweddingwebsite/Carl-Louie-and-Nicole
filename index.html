@@ -110,17 +110,18 @@
   .hero .venue-line{ margin-top:6px; font-size:.92rem; color:var(--ink-soft); letter-spacing:.04em; }
 
   .countdown{
-    margin-top:52px; display:flex; gap:clamp(14px,4vw,40px); flex-wrap:wrap; justify-content:center;
+    margin-top:52px; display:flex; gap:clamp(6px,3vw,40px); flex-wrap:nowrap; justify-content:center;
+    width:100%; max-width:100%;
   }
-  .countdown .cell{ display:flex; flex-direction:column; align-items:center; min-width:70px; }
+  .countdown .cell{ display:flex; flex-direction:column; align-items:center; min-width:0; flex:0 1 auto; }
   .countdown .num{
-    font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,5vw,3rem);
-    color:var(--dusty-blue-deep); line-height:1;
+    font-family:'Cormorant Garamond',serif; font-size:clamp(1.4rem,6vw,3rem);
+    color:var(--dusty-blue-deep); line-height:1; white-space:nowrap;
   }
   .countdown .lbl{
-    margin-top:8px; font-size:.66rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft);
+    margin-top:8px; font-size:clamp(.52rem,1.6vw,.66rem); letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); white-space:nowrap;
   }
-  .countdown .sep{ font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--line); align-self:flex-start; margin-top:2px;}
+  .countdown .sep{ font-family:'Cormorant Garamond',serif; font-size:clamp(1.1rem,4vw,2rem); color:var(--line); align-self:flex-start; margin-top:2px;}
 
   .scroll-cue{
     position:absolute; bottom:34px; left:50%; transform:translateX(-50%);
@@ -148,17 +149,22 @@
   .t-dot{ width:10px; height:10px; border-radius:50%; background:var(--sage); margin-top:8px; box-shadow:0 0 0 4px var(--paper); }
   .t-label{ font-size:1.02rem; color:var(--ink); padding-top:1px; letter-spacing:.01em; }
   @media(max-width:600px){
-    .timeline::before{ left:70px; }
+    .timeline::before{ left:75px; }
     .t-item{ grid-template-columns:60px 30px 1fr; }
     .t-time{ font-size:.92rem; padding-right:10px; }
   }
+  @media(max-width:400px){
+    .timeline::before{ left:65px; }
+    .t-item{ grid-template-columns:50px 30px 1fr; }
+  }
 
   /* ---------- venue cards ---------- */
-  .venue-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:820px; margin:0 auto; }
+  .venue-grid{ display:flex; justify-content:center; gap:28px; max-width:820px; margin:0 auto; }
   .venue-card{
     background:var(--paper); border:1px solid var(--line); padding:38px 30px; text-align:center;
     border-radius:2px;
   }
+  .venue-card--single{ max-width:420px; width:100%; padding:44px 34px; }
   .venue-card .tag{ font-size:.68rem; letter-spacing:.24em; text-transform:uppercase; color:var(--sage-deep); margin-bottom:14px; }
   .venue-card h3{ font-size:1.5rem; color:var(--dusty-blue-deep); margin-bottom:10px; }
   .venue-card p{ font-size:.92rem; color:var(--ink-soft); line-height:1.6; margin:0 0 18px; }
@@ -171,6 +177,7 @@
     font-size:.72rem; letter-spacing:.26em; text-transform:uppercase; color:var(--sage-deep); margin-bottom:22px;
   }
   .ent-pairs{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px 40px; }
+  .ent-pairs--stack{ flex-direction:column; align-items:center; gap:4px; }
   .ent-pair{ font-size:1.05rem; color:var(--ink); line-height:1.9; }
   .ent-list{ columns:2; gap:40px; font-size:1.02rem; line-height:2; color:var(--ink); max-width:520px; margin:0 auto; }
   .ent-single{ font-size:1.15rem; color:var(--ink); }
@@ -307,14 +314,8 @@
       <h2>Ceremony &amp; Reception</h2>
     </div>
     <div class="venue-grid reveal">
-      <div class="venue-card">
-        <div class="tag">Ceremony</div>
-        <h3>Kasa Maco</h3>
-        <p>Mt. View Hotel Resort &amp; Reception Hall<br>Nagcarlan, Laguna</p>
-        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Kasa+Maco+Mt+View+Hotel+Resort+Nagcarlan+Laguna" target="_blank" rel="noopener">View on Map</a>
-      </div>
-      <div class="venue-card">
-        <div class="tag">Reception</div>
+      <div class="venue-card venue-card--single">
+        <div class="tag">Ceremony &amp; Reception</div>
         <h3>Kasa Maco</h3>
         <p>Mt. View Hotel Resort &amp; Reception Hall<br>Nagcarlan, Laguna</p>
         <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Kasa+Maco+Mt+View+Hotel+Resort+Nagcarlan+Laguna" target="_blank" rel="noopener">View on Map</a>
@@ -345,7 +346,7 @@
 
     <div class="ent-block reveal">
       <h3>Principal Sponsors</h3>
-      <div class="ent-pairs">
+      <div class="ent-pairs ent-pairs--stack">
         <div class="ent-pair">Hector Duque &amp; Rebecca Duque</div>
         <div class="ent-pair">Gian Carlo Ramos &amp; Roselyn Navarette</div>
         <div class="ent-pair">Raymond Panaglima &amp; Jimbel Panaglima</div>
@@ -461,11 +462,11 @@
       <p class="note">With all that we have, we've been truly blessed. Your presence and prayers are all that we request — but if you desire to give us nonetheless, a monetary gift is one we humbly welcome.</p>
       <div class="qr-grid">
         <div class="qr-card">
-          <img src="https://ik.imagekit.io/jcsquo5nq/Carl%20and%20Nicole/bdo.jpg" alt="BDO QR Code — IcoandWie4ever">
+          <img src="https://ik.imagekit.io/jcsquo5nq/Carl%20and%20Nicole/bdo.jpg" alt="BDO QR Code — IcoandWie4ever" loading="lazy">
           <div class="bank">BDO</div>
         </div>
         <div class="qr-card">
-          <img src="https://ik.imagekit.io/jcsquo5nq/Carl%20and%20Nicole/maya.jpg" alt="Maya QR Code — Nicole Pantua">
+          <img src="https://ik.imagekit.io/jcsquo5nq/Carl%20and%20Nicole/maya.jpg" alt="Maya QR Code — Nicole Pantua" loading="lazy">
           <div class="bank">Maya</div>
         </div>
       </div>
